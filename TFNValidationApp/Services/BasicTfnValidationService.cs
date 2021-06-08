@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace TFNValidationApp.Services
 {
-    public class BasicTfnValidator : Validation
+    public class BasicTfnValidationService : Validation
     {
-        public BasicTfnValidator(TFNValidationEngine engine):base(engine)
+        public BasicTfnValidationService(TFNValidationEngine engine):base(engine)
         {
 
         }
@@ -15,17 +15,26 @@ namespace TFNValidationApp.Services
         public override ValidationResponse ValidateTfnNumber(string tfnNumber)
         {
             ValidationResponse response = new ValidationResponse();
-            int Sum = 0;
-            int[] weightigFactors = new int[] { 10, 7, 8, 4, 6, 3, 5, 2, 1 };
-            int[] tfnNumberArray = Array.ConvertAll(tfnNumber.ToArray(), x => (int)x - 48);
-            for(int i=0; i<= tfnNumberArray.Length-1;i++)
+
+            try
             {
-                Sum += weightigFactors[i] * tfnNumberArray[i];
+                 int Sum = 0;
+                int[] weightigFactors = new int[] { 10, 7, 8, 4, 6, 3, 5, 2, 1 };
+                int[] tfnNumberArray = Array.ConvertAll(tfnNumber.ToArray(), x => (int)x - 48);
+                for (int i = 0; i <= tfnNumberArray.Length - 1; i++)
+                {
+                    Sum += weightigFactors[i] * tfnNumberArray[i];
+                }
+                int remainder = Sum % 11;
+                response.IsValidNumber = remainder == 0 ? true : false;
+                response.IsConsecutiveSequence = isConsecutiveString(tfnNumber);
             }
-            int remainder = Sum % 11;
-            response.IsValidNumber = remainder == 0 ? true : false;
-            response.IsConsecutiveSequence = isConsecutiveString(tfnNumber);
-            return response;
+            catch(Exception e)
+            {
+                response.IsValidNumber = false;
+            }
+                return response;
+
         }
         public bool isConsecutiveString(string str)
         {

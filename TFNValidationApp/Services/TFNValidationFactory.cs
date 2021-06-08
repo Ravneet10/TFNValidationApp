@@ -12,7 +12,7 @@ namespace TFNValidationApp.Services
                 try
                 {
                     return (Validation)Activator.CreateInstance(
-                        Type.GetType($"TFNValidationApp.Services.{validationType}Validator"),
+                        Type.GetType($"TFNValidationApp.Services.{validationType}ValidationService"),
                             new object[] { engine });
                 }
                 catch
