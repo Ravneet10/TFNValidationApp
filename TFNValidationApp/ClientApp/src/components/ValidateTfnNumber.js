@@ -57,8 +57,8 @@ export class ValidateTfnNumber extends Component {
 
         return (
             <div>
-                <h1>Validate Tfn Number</h1>
-                <p>This component demonstrates validating TFN Number.</p>
+                <h1>Validate Tax File Number</h1>
+                <p>This component demonstrates validating Tax File Number.</p>
                 {contents}
             </div>
         );
@@ -66,7 +66,7 @@ export class ValidateTfnNumber extends Component {
     checkConsecutiveAttempt() {
         if (this.state.consecutiveAttemptCount > 4) {
             this.setState({
-                errorMessage: 'Consecutive numbers combination used for tfn Number in last 30 seconds',
+                errorMessage: 'Consecutive numbers combination used for Tax File Number in last 30 seconds',
                 consecutiveAttemptCount: 0
             })
         }

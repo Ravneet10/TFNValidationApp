@@ -14,8 +14,6 @@ export default class App extends Component {
     return (
       <Layout>
             <Route exact path='/' component={ValidateTfnNumber} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
       </Layout>
     );
   }
